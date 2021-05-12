@@ -6,6 +6,8 @@ export const SIZES = {
     default: '.5rem',
     medium: '.8rem',
     large: '1rem',
+    xlarge: '2.5rem',
+    xxlarge: '4rem',
 }
 export type edgeKindT = "margin" | "border" | "padding"
 export type Size = keyof typeof SIZES

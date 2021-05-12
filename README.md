@@ -9,7 +9,7 @@ import { Box } from 'boxible'
 
 <Box align="between" grow>
   <Box align="middle">Left</Box>
-  <Box>
+  <Box box direction="column>
     <Box align="end>Right Top</Box>
     <div>Right Middle Content</div>
     <divRight Bottom</div>
