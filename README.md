@@ -2,6 +2,7 @@
 
 Uses styled-components to style a div using flexbox styles.  React components can easily set any flexbox style using component properties.  Typescript gives you nice code completion and prop validation.
 
+Full docs are published at [https://nathanstitt.github.io/boxible/](https://nathanstitt.github.io/boxible/)
 ```jsx
 
 import { Box } from 'boxible'
