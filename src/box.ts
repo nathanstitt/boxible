@@ -133,12 +133,15 @@ export interface BoxProps extends GenericPropsI {
     pad?: Size | Area | Side
 }
 
-const DOM_PROPS = ['children', 'onClick', 'type', 'role', 'id', 'tabIndex']
+const OWN_PROPS = [
+    'basis', 'align', 'alignContent', 'direction', 'overflowProp', 'flex', 'justify',
+    'gap', 'height','width', 'fill', 'wrap', 'margin', 'pad', 'padding', 'alignSelf', 'gridArea',
+]
 
 // NOTE: basis must be after flex! Otherwise, flex overrides basis
 export const Box = styled.div
     .withConfig({
-        shouldForwardProp: (prop) => prop.startsWith('data') || DOM_PROPS.includes(prop),
+        shouldForwardProp: (prop) => !OWN_PROPS.includes(prop)
     }) <BoxProps>`
     display: flex;
     box-sizing: border-box;
