@@ -35,7 +35,7 @@ describe('Box Component', () => {
 
     it('allows hacking sizes', () => {
         SIZES.large = '100px'
-        const box = renderer.create(<Box margin={{ left: "large" }}>l</Box>)
+        const box = renderer.create(<Box margin="medium" pad={{ top: 'small' }}>l</Box>)
         expect(box).toMatchSnapshot()
     })
 })

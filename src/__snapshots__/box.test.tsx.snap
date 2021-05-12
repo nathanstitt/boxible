@@ -9,7 +9,8 @@ exports[`Box Component allows hacking sizes 1`] = `
   box-sizing: border-box;
   outline: none;
   max-width: 100%;
-  margin-left: 100px;
+  padding-top: .2rem;
+  margin: .8rem;
 }
 
 <div

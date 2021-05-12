@@ -77,6 +77,7 @@ export interface GenericPropsI {
     alignSelf?: keyof typeof ALIGN_SELF_MAP
     gridArea?: string
     margin?: SizeT | Area
+    padding?: SizeT | Area
 }
 
 export const genericStyles = (props: GenericPropsI & { theme: DefaultTheme }):CSSObject => {
@@ -89,6 +90,9 @@ export const genericStyles = (props: GenericPropsI & { theme: DefaultTheme }):CS
     }
     if (props.margin) {
         Object.assign(styles, edgeStyle('margin', props.margin))
+    }
+    if (props.padding) {
+        Object.assign(styles, edgeStyle('padding', props.padding))
     }
     return styles
 }
