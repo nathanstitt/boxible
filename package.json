@@ -25,7 +25,7 @@
     "test:unit": "jest",
     "test": "run-s test:unit lint test:build",
     "test:build": "run-s build",
-    "prepublishOnly": "./script/pre-publish",
+    "postpublish": "./script/post-publish",
     "lint": "eslint src/*ts"
   },
   "peerDependencies": {
