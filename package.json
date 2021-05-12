@@ -5,15 +5,15 @@
   "repository": "https://github.com/nathanstitt/boxible",
   "author": "Nathan Stitt",
   "license": "MIT",
-  "typings": "dist/boxible.d.ts",
-  "main": "dist/box.js",
-  "module": "dist/boxible.module.js",
+  "typings": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.module.js",
   "exports": {
-    "import": "./dist/boxible.modern.js",
-    "require": "./dist/boxible.js"
+    "import": "./dist/index.modern.js",
+    "require": "./dist/index.js"
   },
-  "unpkg": "dist/boxible.umd.js",
-  "source": "src/box.ts",
+  "unpkg": "dist/index.umd.js",
+  "source": "src/index.ts",
   "engines": {
     "node": ">=10"
   },
