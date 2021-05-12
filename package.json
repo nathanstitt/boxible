@@ -1,0 +1,76 @@
+{
+  "name": "boxible",
+  "version": "0.0.1",
+  "description": "Typescript React component to set flexbox properties on a element",
+  "repository": "https://github.com/nathanstitt/boxible",
+  "author": "Nathan Stitt",
+  "license": "MIT",
+  "typings": "dist/boxible.d.ts",
+  "main": "dist/box.js",
+  "module": "dist/boxible.module.js",
+  "exports": {
+    "import": "./dist/boxible.modern.js",
+    "require": "./dist/boxible.js"
+  },
+  "unpkg": "dist/boxible.umd.js",
+  "source": "src/box.ts",
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "build": "microbundle --no-compress",
+    "build:tsc": "tsc",
+    "build:tsc:watch": "tsc --watch",
+    "start": "microbundle-crl watch --no-compress --format modern,cjs",
+    "test:unit": "jest",
+    "test": "run-s test:unit lint test:build",
+    "test:build": "run-s build",
+    "prepublishOnly": "./script/pre-publish",
+    "lint": "eslint src/*ts"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "styled-components": "*"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.0",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/plugin-proposal-decorators": "^7.13.15",
+    "@babel/preset-env": "^7.14.1",
+    "@babel/preset-react": "^7.13.13",
+    "@babel/preset-typescript": "^7.13.0",
+    "@testing-library/jest-dom": "^5.12.0",
+    "@types/jest": "^26.0.23",
+    "@types/node": "^15.0.2",
+    "@types/styled-components": "^5.1.9",
+    "@typescript-eslint/eslint-plugin": "^4.23.0",
+    "@typescript-eslint/parser": "^4.23.0",
+    "babel-jest": "^26.6.3",
+    "cross-env": "^7.0.3",
+    "eslint": "7.26.0",
+    "eslint-config-argosity": "3.1.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "jest": "^26.6.3",
+    "jest-styled-components": "^7.0.4",
+    "microbundle": "^0.13.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.3.0",
+    "react": "^17.0.2",
+    "react-test-renderer": "^17.0.2",
+    "styled-components": "^5.3.0",
+    "ts-jest": "^26.5.6",
+    "typedoc": "^0.20.36",
+    "typescript": "^4.2.4"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@types/react-test-renderer": "^17.0.1"
+  }
+}

@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Box Component allows hacking sizes 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  box-sizing: border-box;
+  outline: none;
+  max-width: 100%;
+  margin-left: 100px;
+}
+
+<div
+  className="c0"
+>
+  l
+</div>
+`;
+
+exports[`Box Component renders and matches snapshot 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  box-sizing: border-box;
+  outline: none;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-align-content: flex-end;
+  -ms-flex-line-pack: end;
+  align-content: flex-end;
+  min-width: 0;
+  min-height: 0;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-basis: 50% justify-content:space-evenly;
+  -ms-flex-preferred-size: 50% justify-content:space-evenly;
+  flex-basis: 50% justify-content:space-evenly;
+  min-height: 20%;
+  max-width: 80%;
+  height: 100%;
+  -webkit-flex-wrap: wrap padding:1rem;
+  -ms-flex-wrap: wrap padding:1rem;
+  flex-wrap: wrap padding:1rem;
+  margin: .2rem;
+}
+
+.c0 > *:not(:last-child) {
+  margin-right: .8rem;
+}
+
+<div
+  className="c0 a-box-for-testing"
+  id="1"
+>
+  A test
+</div>
+`;

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -e
+
+$(npm bin)/eslint .
+$(npm bin)/tsc --noEmit
+$(npm bin)/jest

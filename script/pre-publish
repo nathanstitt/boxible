@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -e
+
+yarn run typedoc
+if [ -n "$(git status --porcelain)" ]; then
+   echo "Adding docs"
+   git add docs/*
+   git commit -m 'Update docs for ghpages'
+fi
