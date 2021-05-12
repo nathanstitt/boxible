@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import {
-    edgeStyle, overflowStyle, genericStyles, GenericPropsI, Area, SizeT,
+    edgeStyle, overflowStyle, genericStyles, GenericPropsI, Area, Size, Side,
     SIZES, ALIGN_MAP, ALIGN_CONTENT, BASIS, JUSTIFY, FLEX,
 } from './styles'
 
@@ -123,14 +123,14 @@ export interface BoxProps extends GenericPropsI {
     flex?: FlexGrowT
     basis?: string | keyof typeof BASIS
     justify?: keyof typeof JUSTIFY
-    gap?: boolean | SizeT
+    gap?: boolean | Size
     height?: string | MinMaxI
     width?: string | MinMaxI
     fill?: boolean | 'horizontal' | 'vertical'
     wrap?: WrapT
     className?: string
     id?: string | number
-    pad?: SizeT | Area
+    pad?: Size | Area | Side
 }
 
 const DOM_PROPS = ['children', 'onClick', 'type', 'role', 'id', 'tabIndex']

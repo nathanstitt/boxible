@@ -8,7 +8,7 @@ export const SIZES = {
     large: '1rem',
 }
 export type edgeKindT = "margin" | "border" | "padding"
-export type sizesT = keyof typeof SIZES
+export type Size = keyof typeof SIZES
 
 export const  ALIGN_CONTENT = {
     around: 'around',
@@ -46,15 +46,15 @@ export const FLEX = {
 }
 
 export interface Area {
-    horizontal?: sizesT | string
-    vertical?: sizesT | string
-    top?: sizesT | string
-    bottom?: sizesT | string
-    left?: sizesT | string
-    right?: sizesT | string
+    horizontal?: Size | string
+    vertical?: Size | string
+    top?: Size | string
+    bottom?: Size | string
+    left?: Size | string
+    right?: Size | string
 }
 
-export type AreaKey = keyof Area
+export type Side = keyof Area
 
 export const ALIGN_SELF_MAP = {
     center: 'center',
@@ -71,13 +71,12 @@ export const ALIGN_MAP = {
     stretch: 'stretch',
 }
 
-export type SizeT = keyof typeof SIZES
 
 export interface GenericPropsI {
     alignSelf?: keyof typeof ALIGN_SELF_MAP
     gridArea?: string
-    margin?: SizeT | Area
-    padding?: SizeT | Area
+    margin?: Size | Area | Side
+    padding?: Size | Area | Side
 }
 
 export const genericStyles = (props: GenericPropsI & { theme: DefaultTheme }):CSSObject => {
@@ -114,12 +113,18 @@ export const overflowStyle = (overflowProp: string | overflowI): FlattenSimpleIn
     `
 }
 
+const SIDES = ['top', 'right', 'left', 'bottom', 'horizontal', 'vertical']
+
 export const edgeStyle = (
     kind: edgeKindT,
-    data: string | sizesT | Area,
+    data: string | Size | Area,
 ):CSSObject => {
     if (typeof data === 'string') {
-        return { [kind]: SIZES[data] || data }
+        if (SIDES.includes(data)) {
+            data = { [`${data}`]: SIZES.default }
+        } else {
+            return { [kind]: SIZES[data] || data }
+        }
     }
     const styles: CSSObject = {}
 
