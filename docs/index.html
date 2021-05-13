@@ -61,7 +61,7 @@
 				<a href="#make-flexbox-containers-in-typescript-using-styled-components" id="make-flexbox-containers-in-typescript-using-styled-components" style="color: inherit; text-decoration: none;">
 					<h2>make flexbox containers in typescript using styled-components</h2>
 				</a>
-				<p>Uses styled-components to style a div using flexbox styles.  React components can easily set any flexbox style using component properties.  Typescript gives you nice code completion and prop validation.</p>
+				<p>Uses styled-components to style a div using flexbox styles.  React components can easily set any flexbox style using component properties.  Typescript gives you nice code completion and type-safe validations.</p>
 				<p>Full docs are published at <a href="https://nathanstitt.github.io/boxible/">https://nathanstitt.github.io/boxible/</a></p>
 				<pre><code class="language-jsx">
 <span style="color: #000000">import { Box } from &#039;boxible&#039;</span>
@@ -71,7 +71,7 @@
 <span style="color: #000000">  &lt;Box box direction=&quot;column&gt;</span>
 <span style="color: #000000">    &lt;Box align=&quot;end&gt;Right Top&lt;/Box&gt;</span>
 <span style="color: #000000">    &lt;div&gt;Right Middle Content&lt;/div&gt;</span>
-<span style="color: #000000">    &lt;divRight Bottom&lt;/div&gt;</span>
+<span style="color: #000000">    &lt;div&gt;Right Bottom&lt;/div&gt;</span>
 <span style="color: #000000">  &lt;/Box&gt;</span>
 <span style="color: #000000">&lt;/Box&gt;</span>
 </code></pre>
@@ -82,10 +82,22 @@
 |             Right Bottom         |
 -----------------------------------
 </pre>
+				<p>Since the Box element is a styled component, you can also use the &quot;as&quot; prop to render elements other than div, such
+				as <code>label</code> to wrap inputs.</p>
+				<pre><code><span style="color: #000000">&lt;</span><span style="color: #001080">Box</span><span style="color: #000000"> </span><span style="color: #001080">as</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;label&quot;</span><span style="color: #000000">&gt;</span>
+<span style="color: #000000">   &lt;</span><span style="color: #001080">input</span><span style="color: #000000"> </span><span style="color: #001080">name</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;foo&quot;</span><span style="color: #000000"> /&gt;</span>
+<span style="color: #000000">   &lt;</span><span style="color: #267F99">b</span><span style="color: #000000">&gt;</span><span style="color: #001080">Click</span><span style="color: #000000"> </span><span style="color: #001080">to</span><span style="color: #000000"> </span><span style="color: #001080">focus</span><span style="color: #000000"> </span><span style="color: #001080">input</span><span style="color: #000000">&lt;/</span><span style="color: #001080">b</span><span style="color: #000000">&gt;</span>
+<span style="color: #000000">&lt;/</span><span style="color: #001080">Box</span><span style="color: #000000">&gt;</span>
+</code></pre>
+				<pre>
+-----------
+|         |  click to focus input
+-----------
+</pre>
 				<a href="#credits" id="credits" style="color: inherit; text-decoration: none;">
 					<h4>Credits</h4>
 				</a>
-				<p>FlexyBox is based loosely on Grommt’s <a href="https://v2.grommet.io/box">Box component</a>, but re-written in Typescript
+				<p>Boxible is based loosely on Grommt’s <a href="https://v2.grommet.io/box">Box component</a>, but re-written in Typescript
 				and with a few differences, such as no animation support.</p>
 			</div>
 		</div>
