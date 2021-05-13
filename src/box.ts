@@ -129,7 +129,6 @@ export interface BoxProps extends GenericPropsI {
     fill?: boolean | 'horizontal' | 'vertical'
     wrap?: WrapT
     className?: string
-    id?: string | number
     pad?: Size | Area | Side
 }
 
