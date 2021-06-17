@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Box Component allows hacking sizes 1`] = `
-.c0 {
+.emotion-0 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -9,19 +9,19 @@ exports[`Box Component allows hacking sizes 1`] = `
   box-sizing: border-box;
   outline: none;
   max-width: 100%;
-  padding-top: .2rem;
+  padding-top: 103px;
   margin-top: .5rem;
 }
 
 <div
-  className="c0"
+  className="emotion-0"
 >
   l
 </div>
 `;
 
 exports[`Box Component renders and matches snapshot 1`] = `
-.c0 {
+.emotion-0 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -33,31 +33,31 @@ exports[`Box Component renders and matches snapshot 1`] = `
   -ms-flex-align: stretch;
   align-items: stretch;
   -webkit-align-content: flex-end;
-  -ms-flex-line-pack: end;
+  -ms-flex-line-pack: flex-end;
   align-content: flex-end;
   min-width: 0;
   min-height: 0;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-flex-basis: 50% justify-content:space-evenly;
-  -ms-flex-preferred-size: 50% justify-content:space-evenly;
-  flex-basis: 50% justify-content:space-evenly;
+  flex-basis:50% justify-content: space-evenly;
   min-height: 20%;
   max-width: 80%;
   height: 100%;
-  -webkit-flex-wrap: wrap padding:1rem;
-  -ms-flex-wrap: wrap padding:1rem;
-  flex-wrap: wrap padding:1rem;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  padding: 1rem;
   margin: .2rem;
 }
 
-.c0 > *:not(:last-child) {
+.emotion-0>*:not(:last-child) {
   margin-right: .8rem;
 }
 
 <div
-  className="c0 a-box-for-testing"
+  className="a-box-for-testing emotion-0"
   id="1"
 >
   A test

@@ -1,5 +1,7 @@
-import { css, CSSObject, DefaultTheme, FlattenSimpleInterpolation } from 'styled-components'
+import { CSSObject } from '@emotion/react'
+import { Theme } from '@emotion/react'
 import { capitalize } from './util'
+import type { Property } from 'csstype'
 
 export const SIZES = {
     small: '.2rem',
@@ -81,7 +83,7 @@ export interface GenericPropsI {
     padding?: Size | Area | Side
 }
 
-export const genericStyles = (props: GenericPropsI & { theme: DefaultTheme }):CSSObject => {
+export const genericStyles = (props: GenericPropsI & { theme: Theme }):CSSObject => {
     const styles: CSSObject = {}
     if (props.alignSelf) {
         styles['alignSelf'] = ALIGN_SELF_MAP[props.alignSelf]
@@ -99,20 +101,20 @@ export const genericStyles = (props: GenericPropsI & { theme: DefaultTheme }):CS
 }
 
 
-interface overflowI {
-    horizontal?: boolean
-    vertical?: boolean
+interface OverflowI {
+    horizontal?: Property.OverflowX
+    vertical?: Property.OverflowX
 }
 
-export const overflowStyle = (overflowProp: string | overflowI): FlattenSimpleInterpolation => {
+export const overflowStyle = (overflowProp: string | OverflowI): CSSObject => {
     if (typeof overflowProp === 'string') {
-        return css`overflow: ${overflowProp};`
+        return { overflow: overflowProp }
     }
-
-    return css`
-       ${overflowProp.horizontal && `overflow-x: ${overflowProp.horizontal};`}
-       ${overflowProp.vertical && `overflow-y: ${overflowProp.vertical};`};
-    `
+    const style: CSSObject = {}
+//    const s: OverflowY
+    if (overflowProp.horizontal) style['overflowX'] = overflowProp.horizontal;
+    if (overflowProp.vertical) style['overflowY'] = overflowProp.vertical;
+    return style
 }
 
 const SIDES = ['top', 'right', 'left', 'bottom', 'horizontal', 'vertical']

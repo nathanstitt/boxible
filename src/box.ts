@@ -1,4 +1,6 @@
-import styled, { css } from 'styled-components'
+import styled, { CSSObject } from '@emotion/styled'
+import type { Property } from 'csstype'
+
 import {
     edgeStyle, overflowStyle, genericStyles, GenericPropsI, Area, Size, Side,
     SIZES, ALIGN_MAP, ALIGN_CONTENT, BASIS, JUSTIFY, FLEX,
@@ -11,11 +13,11 @@ const basisStyle = (basis: string | keyof typeof BASIS) => (
 type directionT = 'column' | 'row'
 
 const directionStyle = (direction: directionT) => {
-    return css`
-        min-width: 0;
-        min-height: 0;
-        flex-direction: ${direction};
-    `
+    return {
+        minWidth: 0,
+        minHeight: 0,
+        flexDirection: direction,
+    }
 }
 
 
@@ -49,29 +51,26 @@ const fillStyle = (fillProp: string | boolean) => {
         return 'height: 100%;'
     }
     if (fillProp) {
-        return css`
-            width: 100 %;
-            height: 100 %;
-        `
+        return { width: '100%', height: '100%' }
     }
     return undefined
 }
 
 const justifyStyle = (justify: keyof typeof JUSTIFY) => (
-    css`justify-content: ${JUSTIFY[justify]};`
+    `justify-content: ${JUSTIFY[justify]};`
 )
 
 const WRAP_MAP = {
-    reverse: 'wrap-reverse',
+    reverse: 'wrap-reverse' as Property.FlexWrap,
 }
 
 type WrapT = boolean | keyof typeof WRAP_MAP
 
-const wrapStyle = (wrap: WrapT) => {
+const wrapStyle = (wrap: WrapT): CSSObject|undefined => {
     if (typeof wrap === 'boolean') {
-        return wrap ? css`flex-wrap: wrap` : undefined
+        return wrap ? { flexWrap: 'wrap' } : undefined
     }
-    return css`flex-wrap: ${WRAP_MAP[wrap]}`
+    return { flexWrap: WRAP_MAP[wrap] }
 }
 
 interface MinMaxI {
@@ -84,9 +83,9 @@ const widthStyle = (w: string | MinMaxI) => {
         const c: any = {}
         if (w.max) c.maxWidth = w.max
         if (w.min) c.minWidth = w.min
-        return css(c)
+        return c
     } else {
-        return css`width: ${w}`
+        return `width: ${w}`
     }
 }
 
@@ -95,9 +94,9 @@ const heightStyle = (w: string | MinMaxI) => {
         const c: any = {}
         if (w.max) c.maxHeight = w.max
         if (w.min) c.minHeight = w.min
-        return css(c)
+        return c
     } else {
-        return css`height: ${w}`
+        return `height: ${w}`
     }
 }
 
@@ -111,9 +110,7 @@ const gapStyle = (gapProp: string | true) => {
         }
     }
     const size = SIZES[gap as string] || gap
-    return css`
-        > *:not(:last-child) { margin-right: ${size}; }
-    `
+    return `> *:not(:last-child) { margin-right: ${size}; }`
 }
 
 export interface BoxProps extends GenericPropsI {
@@ -138,12 +135,12 @@ const OWN_PROPS = [
 ]
 
 // NOTE: basis must be after flex! Otherwise, flex overrides basis
-export const Box = styled.div
-    .withConfig({
-        shouldForwardProp: (prop) => !OWN_PROPS.includes(prop)
-    }) <BoxProps>`
+export const Box = styled('div', {
+    shouldForwardProp: (prop) => !OWN_PROPS.includes(prop as string)
+})<BoxProps>`
     display: flex;
     box-sizing: border-box;
+
     outline: none;
     ${props => !props.basis && 'max-width: 100%;'};
     ${props => props.align && `align-items: ${ALIGN_MAP[props.align]};`}
@@ -158,7 +155,6 @@ export const Box = styled.div
     ${({ width }) => width && widthStyle(width)}
     ${({ fill }) => fill && fillStyle(fill)}
     ${({ wrap }) => wrap && wrapStyle(wrap)}
-    ${props => props.pad && css(edgeStyle('padding', props.pad))}
-
-    ${props => css(genericStyles(props))}
+    ${props => props.pad && edgeStyle('padding', props.pad)}
+    ${props => genericStyles(props)}
 `

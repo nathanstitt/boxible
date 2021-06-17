@@ -1,13 +1,17 @@
 /* global describe, it, expect */
 import React from 'react'
 import renderer from 'react-test-renderer'
-import 'jest-styled-components'
+import { matchers } from '@emotion/jest'
 import { Box } from './box'
 import { SIZES } from './styles'
 
 
+// Add the custom matchers provided by '@emotion/jest'
+expect.extend(matchers)
+
 describe('Box Component', () => {
     beforeEach(() => SIZES.large = '1rem')
+
     it('renders and matches snapshot', () => {
         const tree = renderer.create(
             <Box
@@ -31,11 +35,15 @@ describe('Box Component', () => {
             </Box>
         ).toJSON();
         expect(tree).toMatchSnapshot();
+        expect(tree).toHaveStyleRule('margin', '.2rem')
+        expect(tree).toHaveStyleRule('padding', '1rem')
+        expect(tree).toHaveStyleRule('flex-wrap', 'wrap')
     })
 
     it('allows hacking sizes', () => {
-        SIZES.large = '100px'
-        const box = renderer.create(<Box margin="top" pad={{ top: 'small' }}>l</Box>)
-        expect(box).toMatchSnapshot()
+        SIZES.large = '103px'
+        const box = renderer.create(<Box margin="top" pad={{ top: 'large' }}>l</Box>)
+        expect(box.toJSON()).toHaveStyleRule('padding-top', '103px')
+        expect(box).toMatchSnapshot();
     })
 })

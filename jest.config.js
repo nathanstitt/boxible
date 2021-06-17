@@ -4,12 +4,15 @@ module.exports = {
   transform: {
     "^.+\\.tsx?$": "ts-jest"
   },
-   "moduleFileExtensions": [
+  "moduleFileExtensions": [
     "ts",
     "tsx",
     "js",
     "jsx",
     "json",
     "node"
+  ],
+  snapshotSerializers: [
+    '@emotion/jest/serializer' /* if needed other snapshotSerializers should go here */
   ]
 };
