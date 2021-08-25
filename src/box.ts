@@ -85,7 +85,7 @@ const widthStyle = (w: string | MinMaxI) => {
         if (w.min) c.minWidth = w.min
         return c
     } else {
-        return `width: ${w}`
+        return `width: ${w};`
     }
 }
 
@@ -96,7 +96,7 @@ const heightStyle = (w: string | MinMaxI) => {
         if (w.min) c.minHeight = w.min
         return c
     } else {
-        return `height: ${w}`
+        return `height: ${w};`
     }
 }
 
