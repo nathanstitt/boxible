@@ -133,10 +133,10 @@ export const edgeStyle = (
     const styles: CSSObject = {}
 
     if (data.horizontal) {
-        styles[`${kind}Right`] = styles[`${kind}-left`] = SIZES[data.horizontal] || data.horizontal
+        styles[`${kind}Right`] = styles[`${kind}Left`] = SIZES[data.horizontal] || data.horizontal
     }
     if (data.vertical) {
-        styles[`${kind}Top`] = styles[`${kind}-bottom`] = SIZES[data.vertical] || data.vertical
+        styles[`${kind}Top`] = styles[`${kind}Bottom`] = SIZES[data.vertical] || data.vertical
     }
 
     ['top', 'right', 'bottom', 'left'].forEach(side => {
