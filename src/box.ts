@@ -140,7 +140,6 @@ export const Box = styled('div', {
 })<BoxProps>`
     display: flex;
     box-sizing: border-box;
-
     outline: none;
     ${props => !props.basis && 'max-width: 100%;'};
     ${props => props.align && `align-items: ${ALIGN_MAP[props.align]};`}
