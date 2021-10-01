@@ -1,3 +1,5 @@
+![Build Status](https://github.com/nathanstitt/boxible/actions/workflows/checks.yml/badge.svg)
+
 ## make flexbox containers in typescript using emotion
 
 Uses emotionjs to style a div using flexbox styles.  React components can easily set any flexbox style using component properties.  Typescript gives you nice code completion and type-safe validations.

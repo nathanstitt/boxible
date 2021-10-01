@@ -4,83 +4,83 @@ import { capitalize } from './util'
 import type { Property } from 'csstype'
 
 export const SIZES = {
-    small: '.2rem',
+    small:   '.2rem',
     default: '.5rem',
-    medium: '.8rem',
-    large: '1rem',
-    xlarge: '2.5rem',
+    medium:  '.8rem',
+    large:   '1rem',
+    xlarge:  '2.5rem',
     xxlarge: '4rem',
 }
 export type edgeKindT = "margin" | "border" | "padding"
 export type Size = keyof typeof SIZES
 
 export const  ALIGN_CONTENT = {
-    around: 'around',
+    around:  'around',
+    center:  'center',
     between: 'between',
-    center: 'center',
-    end: 'flex-end',
-    start: 'flex-start',
     stretch: 'stretch',
+    end:     'flex-end',
+    start:   'flex-start',
 }
 
 export const BASIS = {
-    auto: 'auto',
-    full: '100%',
     '1/2': '50%',
     '1/4': '25%',
     '2/4': '50%',
     '3/4': '75%',
+    auto:  'auto',
+    full:  '100%',
     '1/3': '33.33%',
     '2/3': '66.66%',
 }
 
 export const JUSTIFY = {
-    around: 'space-around',
+    center:  'center',
+    end:     'flex-end',
+    start:   'flex-start',
+    around:  'space-around',
+    evenly:  'space-evenly',
     between: 'space-between',
-    center: 'center',
-    end: 'flex-end',
-    evenly: 'space-evenly',
-    start: 'flex-start',
 }
 
 
 export const FLEX = {
-    grow: '1 0',
+    grow:   '1 0',
     shrink: '0 1',
 }
 
 export interface Area {
     horizontal?: Size | string
-    vertical?: Size | string
-    top?: Size | string
-    bottom?: Size | string
-    left?: Size | string
-    right?: Size | string
+    vertical?:   Size | string
+    top?:        Size | string
+    bottom?:     Size | string
+    left?:       Size | string
+    right?:      Size | string
 }
 
 export type Side = keyof Area
 
 export const ALIGN_SELF_MAP = {
-    center: 'center',
-    end: 'flex-end',
-    start: 'flex-start',
+    center:  'center',
+    end:     'flex-end',
+    start:   'flex-start',
     stretch: 'stretch',
 }
 
 export const ALIGN_MAP = {
     baseline: 'baseline',
-    center: 'center',
-    end: 'flex-end',
-    start: 'flex-start',
-    stretch: 'stretch',
+    center:   'center',
+    end:      'flex-end',
+    start:    'flex-start',
+    stretch:  'stretch',
 }
 
 
 export interface GenericPropsI {
     alignSelf?: keyof typeof ALIGN_SELF_MAP
-    gridArea?: string
-    margin?: Size | Area | Side
-    padding?: Size | Area | Side
+    gridArea?:  string
+    margin?:    Size | Area | Side
+    padding?:   Size | Area | Side
 }
 
 export const genericStyles = (props: GenericPropsI & { theme: Theme }):CSSObject => {
@@ -111,7 +111,6 @@ export const overflowStyle = (overflowProp: string | OverflowI): CSSObject => {
         return { overflow: overflowProp }
     }
     const style: CSSObject = {}
-//    const s: OverflowY
     if (overflowProp.horizontal) style['overflowX'] = overflowProp.horizontal;
     if (overflowProp.vertical) style['overflowY'] = overflowProp.vertical;
     return style
