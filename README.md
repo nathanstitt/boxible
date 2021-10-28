@@ -27,6 +27,26 @@ import { Box } from 'boxible'
 </pre>
 
 
+###  Boxible Props
+
+|property| allowed values | default |
+|--|--|--|
+|  align |  baseline, center, end, start, stretch | |
+| alignContent | around, between, center, end, start, stretch | |
+| direction | column, row | row |
+| flex | true, false, grow, shrink |
+| basis | string value, auto, full, 1/2, 1/4, 1/3, 2/3 | |
+|  justify | around, between, center, end, evenly, start | |
+| gap | boolean | false |
+| height | string, { min, max} | |
+| width | string, { min, max } | |
+| fill | boolean, 'horizontal', 'vertical' | |
+| wrap | boolean | false |
+| className | string | |
+| pad | Size | Area | Side |  |
+| margin | | Size | Area | Side |  |
+
+
 
 Since the Box element is a emotionjs component, you can also use the "as" prop to render elements other than div, such
 as `label` to wrap inputs.
