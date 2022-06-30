@@ -66,7 +66,7 @@ const WRAP_MAP = {
 
 type WrapT = boolean | keyof typeof WRAP_MAP
 
-const wrapStyle = (wrap: WrapT): CSSObject|undefined => {
+const wrapStyle = (wrap: WrapT): CSSObject | undefined => {
     if (typeof wrap === 'boolean') {
         return wrap ? { flexWrap: 'wrap' } : undefined
     }
@@ -129,15 +129,15 @@ export interface BoxProps extends GenericPropsI {
     pad?: Size | Area | Side
 }
 
-const OWN_PROPS = [
+export const BOXIBLE_PROPS = [
     'basis', 'align', 'alignContent', 'direction', 'overflowProp', 'flex', 'justify',
-    'gap', 'height','width', 'fill', 'wrap', 'margin', 'pad', 'padding', 'alignSelf', 'gridArea',
+    'gap', 'height', 'width', 'fill', 'wrap', 'margin', 'pad', 'padding', 'alignSelf', 'gridArea',
 ]
 
 // NOTE: basis must be after flex! Otherwise, flex overrides basis
 export const Box = styled('div', {
-    shouldForwardProp: (prop) => !OWN_PROPS.includes(prop as string)
-})<BoxProps>`
+    shouldForwardProp: (prop) => !BOXIBLE_PROPS.includes(prop as string)
+}) <BoxProps>`
     display: flex;
     box-sizing: border-box;
     outline: none;
