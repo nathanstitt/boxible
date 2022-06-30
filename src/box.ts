@@ -110,7 +110,7 @@ const gapStyle = (gapProp: string | true) => {
         }
     }
     const size = SIZES[gap as string] || gap
-    return { gap: size };
+    return `> *:not(:last-child) { margin-right: ${size}; }`
 }
 
 export interface BoxProps extends GenericPropsI {
@@ -129,14 +129,14 @@ export interface BoxProps extends GenericPropsI {
     pad?: Size | Area | Side
 }
 
-export const BOXIBLE_PROPS = [
+const OWN_PROPS = [
     'basis', 'align', 'alignContent', 'direction', 'overflowProp', 'flex', 'justify',
     'gap', 'height', 'width', 'fill', 'wrap', 'margin', 'pad', 'padding', 'alignSelf', 'gridArea',
 ]
 
 // NOTE: basis must be after flex! Otherwise, flex overrides basis
 export const Box = styled('div', {
-    shouldForwardProp: (prop) => !BOXIBLE_PROPS.includes(prop as string)
+    shouldForwardProp: (prop) => !OWN_PROPS.includes(prop as string)
 }) <BoxProps>`
     display: flex;
     box-sizing: border-box;
