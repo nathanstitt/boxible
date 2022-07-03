@@ -41,6 +41,7 @@ exports[`Box Component renders and matches snapshot 1`] = `
   -ms-flex-direction: column;
   flex-direction: column;
   flex-basis:50% justify-content: space-evenly;
+  gap: .8rem;
   min-height: 20%;
   max-width: 80%;
   height: 100%;
@@ -50,10 +51,6 @@ exports[`Box Component renders and matches snapshot 1`] = `
   flex-wrap: wrap;
   padding: 1rem;
   margin: .2rem;
-}
-
-.emotion-0>*:not(:last-child) {
-  margin-right: .8rem;
 }
 
 <div

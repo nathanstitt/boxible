@@ -110,7 +110,7 @@ const gapStyle = (gapProp: string | true) => {
         }
     }
     const size = SIZES[gap as string] || gap
-    return `> *:not(:last-child) { margin-right: ${size}; }`
+    return { gap: size };
 }
 
 export interface BoxProps extends GenericPropsI {
