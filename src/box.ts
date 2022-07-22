@@ -2,7 +2,7 @@ import styled, { CSSObject } from '@emotion/styled'
 import type { Property } from 'csstype'
 
 import {
-    edgeStyle, overflowStyle, genericStyles, GenericPropsI, Area, Size, Side,
+    edgeStyle, overflowStyle, genericStyles, GenericProps, Area, Size, Side,
     SIZES, ALIGN_MAP, ALIGN_CONTENT, BASIS, JUSTIFY, FLEX,
 } from './styles'
 
@@ -73,12 +73,12 @@ const wrapStyle = (wrap: WrapT): CSSObject | undefined => {
     return { flexWrap: WRAP_MAP[wrap] }
 }
 
-interface MinMaxI {
+interface MinMax {
     max?: string
     min?: string
 }
 
-const widthStyle = (w: string | MinMaxI) => {
+const widthStyle = (w: string | MinMax) => {
     if (typeof w === 'object') {
         const c: any = {}
         if (w.max) c.maxWidth = w.max
@@ -89,7 +89,7 @@ const widthStyle = (w: string | MinMaxI) => {
     }
 }
 
-const heightStyle = (w: string | MinMaxI) => {
+const heightStyle = (w: string | MinMax) => {
     if (typeof w === 'object') {
         const c: any = {}
         if (w.max) c.maxHeight = w.max
@@ -113,7 +113,7 @@ const gapStyle = (gapProp: string | true) => {
     return { gap: size };
 }
 
-export interface BoxProps extends GenericPropsI {
+export interface BoxProps extends GenericProps {
     align?: keyof typeof ALIGN_MAP
     alignContent?: keyof typeof ALIGN_CONTENT
     direction?: directionT
@@ -121,12 +121,13 @@ export interface BoxProps extends GenericPropsI {
     basis?: string | keyof typeof BASIS
     justify?: keyof typeof JUSTIFY
     gap?: boolean | Size
-    height?: string | MinMaxI
-    width?: string | MinMaxI
+    height?: string | MinMax
+    width?: string | MinMax
     fill?: boolean | 'horizontal' | 'vertical'
     wrap?: WrapT
     className?: string
     pad?: Size | Area | Side
+
 }
 
 const OWN_PROPS = [

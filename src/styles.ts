@@ -3,7 +3,6 @@ import { Theme } from '@emotion/react'
 import { capitalize } from './util'
 import type { Property } from 'csstype'
 
-
 export const SIZES = {
     small: '.2rem',
     default: '.5rem',
@@ -12,6 +11,7 @@ export const SIZES = {
     xlarge: '2.5rem',
     xxlarge: '4rem',
 }
+
 export type edgeKindT = "margin" | "border" | "padding"
 export type Size = keyof typeof SIZES
 
@@ -44,7 +44,6 @@ export const JUSTIFY = {
     between: 'space-between',
 }
 
-
 export const FLEX = {
     grow: '1 0',
     shrink: '0 1',
@@ -76,15 +75,14 @@ export const ALIGN_MAP = {
     stretch: 'stretch',
 }
 
-
-export interface GenericPropsI {
+export interface GenericProps {
     alignSelf?: keyof typeof ALIGN_SELF_MAP
     gridArea?: string
     margin?: Size | Area | Side
     padding?: Size | Area | Side
 }
 
-export const genericStyles = (props: GenericPropsI & { theme: Theme }): CSSObject => {
+export const genericStyles = (props: GenericProps & { theme: Theme }): CSSObject => {
     const styles: CSSObject = {}
     if (props.alignSelf) {
         styles['alignSelf'] = ALIGN_SELF_MAP[props.alignSelf]
