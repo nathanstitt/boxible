@@ -131,7 +131,7 @@ export interface BoxProps extends GenericProps {
 }
 
 const OWN_PROPS = [
-    'basis', 'align', 'alignContent', 'direction', 'overflowProp', 'flex', 'justify',
+    'basis', 'align', 'alignContent', 'direction', 'overflowProp', 'flex', 'justify', 'as',
     'gap', 'height', 'width', 'fill', 'wrap', 'margin', 'pad', 'padding', 'alignSelf', 'gridArea',
 ]
 

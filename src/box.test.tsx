@@ -46,4 +46,9 @@ describe('Box Component', () => {
         expect(box.toJSON()).toHaveStyleRule('padding-top', '103px')
         expect(box).toMatchSnapshot();
     })
+
+    it('renders using `as`', () => {
+        const box = renderer.create(<Box as="button">btn</Box>)
+        console.log(box.toJSON())
+    })
 })
