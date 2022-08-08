@@ -15,14 +15,29 @@ export const SIZES = {
 export type edgeKindT = "margin" | "border" | "padding"
 export type Size = keyof typeof SIZES
 
-export const ALIGN_CONTENT = {
-    around: 'around',
-    center: 'center',
-    between: 'between',
-    stretch: 'stretch',
-    end: 'flex-end',
-    start: 'flex-start',
+export const SCREEN_SIZES = {
+    xs: `max-width: 576px`,
+    sm: `min-width: 576px`,
+    md: `min-width: 768px`,
+    lg: `min-width: 992px`,
+    xl: `min-width: 1200px`,
+    xxl: `min-width: 1400px`,
+    mobile: `max-width: 767px`,
+    tablet: `min-width: 768px`,
+    desktop: `min-width: 992px`,
 }
+export type ScreenSizeNames = keyof typeof SCREEN_SIZES
+
+export const ALIGN_CONTENT_MAP = {
+    start: 'flex-start',
+    center: 'center',
+    end: 'flex-end',
+    around: 'space-around',
+    between: 'space-between',
+    evenly: 'space-evenly',
+    stretch: 'stretch',
+}
+//export type AlignContentNames = keyof typeof ALIGN_CONTENT
 
 export const BASIS = {
     '1/2': '50%',
@@ -35,13 +50,13 @@ export const BASIS = {
     '2/3': '66.66%',
 }
 
-export const JUSTIFY = {
+export const JUSTIFY_MAP = {
+    start: 'flex-start',
     center: 'center',
     end: 'flex-end',
-    start: 'flex-start',
     around: 'space-around',
-    evenly: 'space-evenly',
     between: 'space-between',
+    evenly: 'space-evenly',
 }
 
 export const FLEX = {
@@ -74,6 +89,7 @@ export const ALIGN_MAP = {
     start: 'flex-start',
     stretch: 'stretch',
 }
+//export type AlignNames = keyof typeof ALIGN_MAP
 
 export interface GenericProps {
     alignSelf?: keyof typeof ALIGN_SELF_MAP

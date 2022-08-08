@@ -2,22 +2,29 @@ import styled, { CSSObject } from '@emotion/styled'
 import type { Property } from 'csstype'
 
 import {
-    edgeStyle, overflowStyle, genericStyles, GenericProps, Area, Size, Side,
-    SIZES, ALIGN_MAP, ALIGN_CONTENT, BASIS, JUSTIFY, FLEX,
+    edgeStyle, overflowStyle, genericStyles,
+    GenericProps, Area, Size, Side, ScreenSizeNames,
+    SIZES, SCREEN_SIZES, ALIGN_MAP, ALIGN_CONTENT_MAP, BASIS, JUSTIFY_MAP, FLEX,
 } from './styles'
 
 const basisStyle = (basis: string | keyof typeof BASIS) => (
     `flex-basis: ${BASIS[basis] || basis}`
 )
 
-type directionT = 'column' | 'row'
+type Direction = 'column' | 'row' | 'column-reverse' | 'row-reverse'
 
-const directionStyle = (direction: directionT) => {
-    return {
-        minWidth: 0,
-        minHeight: 0,
-        flexDirection: direction,
-    }
+const directionStyle = (direction: Direction) => `
+    min-width: 0;
+    min-height: 0;
+    flex-direction: ${direction};
+`
+
+const DIRECTION_MAP: Record<string, string> = {
+    column: directionStyle('column'),
+    row: directionStyle('row'),
+    columnReverse: directionStyle('column-reverse'),
+    rowReverse: directionStyle('row-reverse'),
+
 }
 
 
@@ -56,9 +63,24 @@ const fillStyle = (fillProp: string | boolean) => {
     return undefined
 }
 
-const justifyStyle = (justify: keyof typeof JUSTIFY) => (
-    `justify-content: ${JUSTIFY[justify]};`
-)
+type Indexable = string | number | symbol | any
+
+function responsiveStyle<T extends object>(
+    prop: keyof T | Partial<Record<ScreenSizeNames, keyof T>>,
+    cssName: string | ((s: Indexable) => string | CSSObject),
+    map: T,
+) {
+    let styles = ''
+    const toStyle = typeof cssName == 'function' ? cssName :
+        (key: Indexable) => cssName ? `${cssName}: ${map[key]};` : map[key]
+    if (typeof prop === 'object') {
+        for (const [sz, key] of Object.entries(prop)) {
+            styles += `@media(${SCREEN_SIZES[sz]}) { ${toStyle(key)}; } `
+        }
+        return styles
+    }
+    return toStyle(prop)
+}
 
 const WRAP_MAP = {
     reverse: 'wrap-reverse' as Property.FlexWrap,
@@ -85,7 +107,7 @@ const widthStyle = (w: string | MinMax) => {
         if (w.min) c.minWidth = w.min
         return c
     } else {
-        return `width: ${w};`
+        return `width: ${w}; `
     }
 }
 
@@ -96,7 +118,7 @@ const heightStyle = (w: string | MinMax) => {
         if (w.min) c.minHeight = w.min
         return c
     } else {
-        return `height: ${w};`
+        return `height: ${w}; `
     }
 }
 
@@ -114,12 +136,12 @@ const gapStyle = (gapProp: string | true) => {
 }
 
 export interface BoxProps extends GenericProps {
-    align?: keyof typeof ALIGN_MAP
-    alignContent?: keyof typeof ALIGN_CONTENT
-    direction?: directionT
+    align?: keyof typeof ALIGN_MAP | Partial<Record<ScreenSizeNames, keyof typeof ALIGN_MAP>>,
+    alignContent?: keyof typeof ALIGN_CONTENT_MAP | Partial<Record<ScreenSizeNames, keyof typeof ALIGN_CONTENT_MAP>>,
+    direction?: keyof typeof DIRECTION_MAP | Partial<Record<ScreenSizeNames, keyof typeof DIRECTION_MAP>>,
+    justify?: keyof typeof JUSTIFY_MAP | Partial<Record<ScreenSizeNames, keyof typeof JUSTIFY_MAP>>,
     flex?: FlexGrowT
     basis?: string | keyof typeof BASIS
-    justify?: keyof typeof JUSTIFY
     gap?: boolean | Size
     height?: string | MinMax
     width?: string | MinMax
@@ -136,25 +158,35 @@ const OWN_PROPS = [
 ]
 
 // NOTE: basis must be after flex! Otherwise, flex overrides basis
-export const Box = styled('div', {
+const buildBox = () => styled('div', {
     shouldForwardProp: (prop) => !OWN_PROPS.includes(prop as string)
 }) <BoxProps>`
     display: flex;
     box-sizing: border-box;
     outline: none;
-    ${props => !props.basis && 'max-width: 100%;'};
-    ${props => props.align && `align-items: ${ALIGN_MAP[props.align]};`}
-    ${props => props.alignContent && `align-content: ${ALIGN_CONTENT[props.alignContent]};`}
-    ${props => props.direction && directionStyle(props.direction)}
+    ${({ basis }) => !basis && 'max-width: 100%;'}
+    ${({ align }) => align && responsiveStyle(align, 'align-items', ALIGN_MAP)}
+    ${({ alignContent }) => alignContent && responsiveStyle(alignContent, 'align-content', ALIGN_CONTENT_MAP)}
+    ${({ direction }) => direction && responsiveStyle(direction, '', DIRECTION_MAP)}
+    ${({ justify }) => justify && responsiveStyle(justify, 'justify-content', JUSTIFY_MAP)}
     ${(props: any) => props.overflowProp && overflowStyle(props.overflowProp)}
     ${({ flex, basis }) => flex && flexStyle(flex, basis)}
     ${({ basis }) => basis && basisStyle(basis)}
-    ${({ justify }) => justify && justifyStyle(justify)}
     ${({ gap }: any) => gap && gapStyle(gap)}
     ${({ height }) => height && heightStyle(height)}
     ${({ width }) => width && widthStyle(width)}
     ${({ fill }) => fill && fillStyle(fill)}
     ${({ wrap }) => wrap && wrapStyle(wrap)}
-    ${props => props.pad && edgeStyle('padding', props.pad)}
+    ${({ pad }) => pad && edgeStyle('padding', pad)}
     ${props => genericStyles(props)}
 `
+const box: any = buildBox()
+box.screenSizes = SCREEN_SIZES
+
+type BoxT = ReturnType<typeof buildBox> & {
+    screenSizes: Record<ScreenSizeNames, number>
+}
+
+const Box = box as BoxT
+
+export { Box }

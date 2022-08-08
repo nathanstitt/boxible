@@ -13,10 +13,71 @@ exports[`Box Component allows hacking sizes 1`] = `
   margin-top: .5rem;
 }
 
+@media (min-width: 1001px) {
+  .emotion-0 {
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+  }
+}
+
 <div
   className="emotion-0"
 >
   l
+</div>
+`;
+
+exports[`Box Component is responsive 1`] = `
+.emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  box-sizing: border-box;
+  outline: none;
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .emotion-0 {
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+  }
+}
+
+@media (min-width: 576px) {
+  .emotion-0 {
+    -webkit-align-content: flex-end;
+    -ms-flex-line-pack: flex-end;
+    align-content: flex-end;
+  }
+}
+
+@media (min-width: 992px) {
+  .emotion-0 {
+    -webkit-align-content: space-between;
+    -ms-flex-line-pack: space-between;
+    align-content: space-between;
+  }
+}
+
+@media (min-width: 992px) {
+  .emotion-0 {
+    -webkit-box-pack: space-evenly;
+    -ms-flex-pack: space-evenly;
+    -webkit-justify-content: space-evenly;
+    justify-content: space-evenly;
+  }
+}
+
+<div
+  className="emotion-0"
+>
+  btn
 </div>
 `;
 
@@ -37,11 +98,14 @@ exports[`Box Component renders and matches snapshot 1`] = `
   align-content: flex-end;
   min-width: 0;
   min-height: 0;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  flex-basis:50% justify-content: space-evenly;
-  gap: .8rem;
+  -webkit-flex-direction: column-reverse;
+  -ms-flex-direction: column-reverse;
+  flex-direction: column-reverse;
+  -webkit-box-pack: space-evenly;
+  -ms-flex-pack: space-evenly;
+  -webkit-justify-content: space-evenly;
+  justify-content: space-evenly;
+  flex-basis:50% gap: .8rem;
   min-height: 20%;
   max-width: 80%;
   height: 100%;
