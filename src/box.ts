@@ -164,7 +164,6 @@ const buildBox = () => styled('div', {
     display: flex;
     box-sizing: border-box;
     outline: none;
-    ${({ basis }) => !basis && 'max-width: 100%;'}
     ${({ align }) => align && responsiveStyle(align, 'align-items', ALIGN_MAP)}
     ${({ alignContent }) => alignContent && responsiveStyle(alignContent, 'align-content', ALIGN_CONTENT_MAP)}
     ${({ direction }) => direction && responsiveStyle(direction, '', DIRECTION_MAP)}

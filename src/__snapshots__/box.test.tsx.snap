@@ -8,7 +8,6 @@ exports[`Box Component allows hacking sizes 1`] = `
   display: flex;
   box-sizing: border-box;
   outline: none;
-  max-width: 100%;
   padding-top: 103px;
   margin-top: .5rem;
 }
@@ -37,7 +36,6 @@ exports[`Box Component is responsive 1`] = `
   display: flex;
   box-sizing: border-box;
   outline: none;
-  max-width: 100%;
 }
 
 @media (min-width: 768px) {
