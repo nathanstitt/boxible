@@ -60,8 +60,8 @@ Their definitions can be overridden as detailed in the hacking sizes [test.ts](s
 | fill         | boolean, 'horizontal', 'vertical'            |         |
 | wrap         | boolean                                      | false   |
 | className    | string                                       |         |
-| pad          | Size                                         | Area    |
-| margin       |                                              | Size    |
+| pad          | px value, small, medium, large, xxlarge      | Size    |
+| margin       | px value, small, medium, large, xxlarge      | Size    |
 
 align, alignContent, direction, and justify are "responsive" and can alternatively be prefixed with a size
 
@@ -74,12 +74,6 @@ as `label` to wrap inputs.
   <b>Click to focus input</b>
 </Box>
 ```
-
-## <pre>
-
-## | | click to focus input
-
-</pre>
 
 #### Credits
 
