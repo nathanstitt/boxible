@@ -28,8 +28,8 @@ const DIRECTION_MAP: Record<string, string> = {
 
 
 interface FlexGrowShrinkI {
-    grow?: string
-    shrink?: string
+    grow?: number
+    shrink?: number
 }
 
 type FlexGrowT = boolean | keyof typeof FLEX | FlexGrowShrinkI
@@ -37,16 +37,18 @@ type FlexGrowT = boolean | keyof typeof FLEX | FlexGrowShrinkI
 const flexStyle = (flex: FlexGrowT, basis?: string | keyof typeof BASIS) => {
     let flexStyle = ''
     if (typeof flex === 'boolean') {
-        flexStyle = flex ? '1 1' : '0 0'
+        flexStyle = '1 1' // function won't be called if flex is false (but why use Box if you don't want flex?)
     }
-
+    if (typeof flex == 'object') {
+        flexStyle = `${flex.grow} ${flex.shrink}`
+    }
     if (typeof flex == 'string') {
         flexStyle = FLEX[flex]
     }
 
-    const basisStyle = flex !== true && !basis ? ' auto' : ''
+    const basisStyleDef = basis ? `${BASIS[basis] || basis}` : 'auto'
 
-    return `flex: ${flexStyle}${basisStyle}; `
+    return `flex: ${flexStyle} ${basisStyleDef}; `
 }
 
 const fillStyle = (fillProp: string | boolean) => {
@@ -169,7 +171,7 @@ const buildBox = () => styled('div', {
     ${({ justify }) => justify && responsiveStyle(justify, 'justify-content', JUSTIFY_MAP)}
     ${(props: any) => props.overflowProp && overflowStyle(props.overflowProp)}
     ${({ flex, basis }) => flex && flexStyle(flex, basis)}
-    ${({ basis }) => basis && basisStyle(basis)}
+    ${({ flex, basis }) => !flex && basis && basisStyle(basis)}
     ${({ gap }: any) => gap && gapStyle(gap)}
     ${({ height }) => height && heightStyle(height)}
     ${({ width }) => width && widthStyle(width)}
