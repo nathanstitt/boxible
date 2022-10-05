@@ -36,9 +36,9 @@ exports[`Box Component can set shrink/grow/basis at once 1`] = `
   display: flex;
   box-sizing: border-box;
   outline: none;
-  -webkit-flex: 3 1 50%;
-  -ms-flex: 3 1 50%;
-  flex: 3 1 50%;
+  -webkit-flex: 3 0 50%;
+  -ms-flex: 3 0 50%;
+  flex: 3 0 50%;
 }
 
 <div

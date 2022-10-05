@@ -28,8 +28,8 @@ const DIRECTION_MAP: Record<string, string> = {
 
 
 interface FlexGrowShrinkI {
-    grow?: number
-    shrink?: number
+    grow?: number | false
+    shrink?: number | false
     basis?: string | number | keyof typeof BASIS
 }
 
@@ -41,7 +41,9 @@ const flexStyle = (flex: FlexGrowT, basis?: string | number | keyof typeof BASIS
         flexStyle = '1 1' // function won't be called if flex is false (but why use Box if you don't want flex?)
     }
     if (typeof flex == 'object') {
-        flexStyle = `${flex.grow} ${flex.shrink}`
+        const shrink = flex.shrink == null ? 1 : flex.shrink || 0;
+        const grow = flex.grow == null ? 1 : flex.grow || 0;
+        flexStyle = `${grow} ${shrink}`
         if (flex.basis && !basis) {
             basis = flex.basis
         }

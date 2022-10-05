@@ -45,10 +45,13 @@ describe('Box Component', () => {
 
     it('can set shrink/grow/basis at once', () => {
         const tree = renderer.create(
-            <Box flex={{ grow: 3, shrink: 1, basis: '1/2' }}>something</Box>
+            <Box flex={{ grow: 3, shrink: false, basis: '1/2' }}>something</Box>
         ).toJSON()
         expect(tree).toMatchSnapshot()
-        expect(tree).toHaveStyleRule('flex', '3 1 50%')
+        expect(tree).toHaveStyleRule('flex', '3 0 50%')
+        expect(
+            renderer.create(<Box flex={{ basis: '42.2%' }}>something</Box>).toJSON()
+        ).toHaveStyleRule('flex', '1 1 42.2%')
     })
     it('allows hacking sizes', () => {
         SIZES.large = '103px'
