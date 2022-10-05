@@ -65,12 +65,12 @@ export const FLEX = {
 }
 
 export interface Area {
-    horizontal?: Size | string
-    vertical?: Size | string
-    top?: Size | string
-    bottom?: Size | string
-    left?: Size | string
-    right?: Size | string
+    horizontal?: Size | string | number
+    vertical?: Size | string | number
+    top?: Size | string | number
+    bottom?: Size | string | number
+    left?: Size | string | number
+    right?: Size | string | number
 }
 
 export type Side = keyof Area
@@ -89,13 +89,13 @@ export const ALIGN_MAP = {
     start: 'flex-start',
     stretch: 'stretch',
 }
-//export type AlignNames = keyof typeof ALIGN_MAP
+export type AlignNames = keyof typeof ALIGN_MAP
 
 export interface GenericProps {
     alignSelf?: keyof typeof ALIGN_SELF_MAP
     gridArea?: string
-    margin?: Size | Area | Side
-    padding?: Size | Area | Side
+    margin?: number | string | Size | Area | Side
+    padding?: number | string | Size | Area | Side
 }
 
 export const genericStyles = (props: GenericProps & { theme: Theme }): CSSObject => {
@@ -135,7 +135,7 @@ const SIDES = ['top', 'right', 'left', 'bottom', 'horizontal', 'vertical']
 
 export const edgeStyle = (
     kind: edgeKindT,
-    data: string | Size | Area,
+    data: string | number | Size | Area,
 ): CSSObject => {
     if (typeof data === 'string') {
         if (SIDES.includes(data)) {
@@ -144,6 +144,10 @@ export const edgeStyle = (
             return { [kind]: SIZES[data] || data }
         }
     }
+    if (typeof data == 'number') {
+        return { [kind]: `${data}px` }
+    }
+
     const styles: CSSObject = {}
 
     if (data.horizontal) {

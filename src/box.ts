@@ -2,8 +2,8 @@ import styled, { CSSObject } from '@emotion/styled'
 import type { Property } from 'csstype'
 
 import {
-    edgeStyle, overflowStyle, genericStyles,
-    GenericProps, Area, Size, Side, ScreenSizeNames,
+    overflowStyle, genericStyles,
+    GenericProps, Size, ScreenSizeNames,
     SIZES, SCREEN_SIZES, ALIGN_MAP, ALIGN_CONTENT_MAP, BASIS, JUSTIFY_MAP, FLEX,
 } from './styles'
 
@@ -155,8 +155,6 @@ export interface BoxProps extends GenericProps {
     fill?: boolean | 'horizontal' | 'vertical'
     wrap?: WrapT
     className?: string
-    pad?: Size | Area | Side
-
 }
 
 const OWN_PROPS = [
@@ -183,7 +181,6 @@ const buildBox = () => styled('div', {
     ${({ width }) => width && widthStyle(width)}
     ${({ fill }) => fill && fillStyle(fill)}
     ${({ wrap }) => wrap && wrapStyle(wrap)}
-    ${({ pad }) => pad && edgeStyle('padding', pad)}
     ${props => genericStyles(props)}
 `
 const box: any = buildBox()

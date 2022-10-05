@@ -31,7 +31,7 @@ describe('Box Component', () => {
                 wrap
                 className="a-box-for-testing"
                 id="1"
-                pad="large"
+                padding="large"
                 margin="small"
             >
                 A test
@@ -43,6 +43,14 @@ describe('Box Component', () => {
         expect(tree).toHaveStyleRule('flex-wrap', 'wrap')
     })
 
+    it('supports numbers for sizes', () => {
+        const tree = renderer.create(
+            <Box padding={10} margin={{ left: 11, right: '1rem' }} >something</Box>
+        ).toJSON()
+        expect(tree).toHaveStyleRule('padding', '10px')
+        expect(tree).toHaveStyleRule('margin-left', '11px')
+        expect(tree).toHaveStyleRule('margin-right', '1rem')
+    })
     it('can set shrink/grow/basis at once', () => {
         const tree = renderer.create(
             <Box flex={{ grow: 3, shrink: false, basis: '1/2' }}>something</Box>
@@ -56,7 +64,7 @@ describe('Box Component', () => {
     it('allows hacking sizes', () => {
         SIZES.large = '103px'
         SCREEN_SIZES.lg = 'min-width: 1001px'
-        const box = renderer.create(<Box margin="top" justify={{ lg: 'start' }} pad={{ top: 'large' }}>l</Box>)
+        const box = renderer.create(<Box margin="top" justify={{ lg: 'start' }} padding={{ top: 'large' }}>l</Box>)
         const tree = box.toJSON()
         expect(tree).toHaveStyleRule('padding-top', '103px')
         expect(tree).toHaveStyleRule('justify-content', 'flex-start', {

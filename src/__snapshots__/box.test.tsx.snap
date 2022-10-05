@@ -8,8 +8,8 @@ exports[`Box Component allows hacking sizes 1`] = `
   display: flex;
   box-sizing: border-box;
   outline: none;
-  padding-top: 103px;
   margin-top: .5rem;
+  padding-top: 103px;
 }
 
 @media (min-width: 1001px) {
@@ -134,8 +134,8 @@ exports[`Box Component renders and matches snapshot 1`] = `
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  padding: 1rem;
   margin: .2rem;
+  padding: 1rem;
 }
 
 <div
