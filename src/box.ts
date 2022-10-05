@@ -8,7 +8,7 @@ import {
 } from './styles'
 
 const basisStyle = (basis: string | keyof typeof BASIS) => (
-    `flex-basis: ${BASIS[basis] || basis}`
+    `flex-basis: ${BASIS[basis] || basis};`
 )
 
 type Direction = 'column' | 'row' | 'column-reverse' | 'row-reverse'
@@ -24,7 +24,6 @@ const DIRECTION_MAP: Record<string, string> = {
     row: directionStyle('row'),
     columnReverse: directionStyle('column-reverse'),
     rowReverse: directionStyle('row-reverse'),
-
 }
 
 
