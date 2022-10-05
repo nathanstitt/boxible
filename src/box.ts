@@ -7,7 +7,7 @@ import {
     SIZES, SCREEN_SIZES, ALIGN_MAP, ALIGN_CONTENT_MAP, BASIS, JUSTIFY_MAP, FLEX,
 } from './styles'
 
-const basisStyle = (basis: string | keyof typeof BASIS) => (
+const basisStyle = (basis: string | number | keyof typeof BASIS) => (
     `flex-basis: ${BASIS[basis] || basis};`
 )
 
@@ -30,17 +30,21 @@ const DIRECTION_MAP: Record<string, string> = {
 interface FlexGrowShrinkI {
     grow?: number
     shrink?: number
+    basis?: string | number | keyof typeof BASIS
 }
 
 type FlexGrowT = boolean | keyof typeof FLEX | FlexGrowShrinkI
 
-const flexStyle = (flex: FlexGrowT, basis?: string | keyof typeof BASIS) => {
+const flexStyle = (flex: FlexGrowT, basis?: string | number | keyof typeof BASIS) => {
     let flexStyle = ''
     if (typeof flex === 'boolean') {
         flexStyle = '1 1' // function won't be called if flex is false (but why use Box if you don't want flex?)
     }
     if (typeof flex == 'object') {
         flexStyle = `${flex.grow} ${flex.shrink}`
+        if (flex.basis && !basis) {
+            basis = flex.basis
+        }
     }
     if (typeof flex == 'string') {
         flexStyle = FLEX[flex]
@@ -142,7 +146,7 @@ export interface BoxProps extends GenericProps {
     direction?: keyof typeof DIRECTION_MAP | Partial<Record<ScreenSizeNames, keyof typeof DIRECTION_MAP>>,
     justify?: keyof typeof JUSTIFY_MAP | Partial<Record<ScreenSizeNames, keyof typeof JUSTIFY_MAP>>,
     flex?: FlexGrowT
-    basis?: string | keyof typeof BASIS
+    basis?: string | number | keyof typeof BASIS
     gap?: boolean | Size
     height?: string | MinMax
     width?: string | MinMax

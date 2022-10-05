@@ -28,6 +28,26 @@ exports[`Box Component allows hacking sizes 1`] = `
 </div>
 `;
 
+exports[`Box Component can set shrink/grow/basis at once 1`] = `
+.emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  box-sizing: border-box;
+  outline: none;
+  -webkit-flex: 3 1 50%;
+  -ms-flex: 3 1 50%;
+  flex: 3 1 50%;
+}
+
+<div
+  className="emotion-0"
+>
+  something
+</div>
+`;
+
 exports[`Box Component is responsive 1`] = `
 .emotion-0 {
   display: -webkit-box;

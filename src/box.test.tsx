@@ -43,6 +43,13 @@ describe('Box Component', () => {
         expect(tree).toHaveStyleRule('flex-wrap', 'wrap')
     })
 
+    it('can set shrink/grow/basis at once', () => {
+        const tree = renderer.create(
+            <Box flex={{ grow: 3, shrink: 1, basis: '1/2' }}>something</Box>
+        ).toJSON()
+        expect(tree).toMatchSnapshot()
+        expect(tree).toHaveStyleRule('flex', '3 1 50%')
+    })
     it('allows hacking sizes', () => {
         SIZES.large = '103px'
         SCREEN_SIZES.lg = 'min-width: 1001px'
