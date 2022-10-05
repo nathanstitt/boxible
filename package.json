@@ -1,6 +1,6 @@
 {
   "name": "boxible",
-  "version": "1.6.2",
+  "version": "1.7.0",
   "description": "Typescript React component to set flexbox properties on a element",
   "repository": "https://github.com/nathanstitt/boxible",
   "author": "Nathan Stitt",
