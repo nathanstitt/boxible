@@ -9,16 +9,9 @@
   "typings": "dist/boxible.d.ts",
   "main": "dist/boxible.cjs",
   "module": "dist/boxible.js",
-  "exports": {
-    "types": "dist/boxible.d.ts",
-    "require": "./dist/boxible.js",
-    "default": "./dist/boxible.modern.js",
-    "import": "./dist/boxible.modern.js"
-  },
-  "unpkg": "dist/boxible.umd.js",
   "source": "src/boxible.ts",
   "engines": {
-    "node": ">=10"
+    "node": ">=14"
   },
   "scripts": {
     "build": "microbundle --no-compress",
