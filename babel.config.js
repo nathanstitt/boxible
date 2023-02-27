@@ -1,4 +1,4 @@
-module.exports = {
+const config = {
     presets: [
         ['@babel/preset-env', {targets: {node: 'current'}}],
         ['@babel/preset-typescript', { isTSX: true, allExtensions: true }],
@@ -6,3 +6,5 @@ module.exports = {
     "plugins": [
     ],
 };
+
+export default config

@@ -1,4 +1,4 @@
-module.exports = {
+const config = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
   transform: {
@@ -16,3 +16,5 @@ module.exports = {
     '@emotion/jest/serializer' /* if needed other snapshotSerializers should go here */
   ]
 };
+
+export default config
