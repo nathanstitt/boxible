@@ -154,6 +154,7 @@ export interface BoxProps extends GenericProps {
     width?: string | MinMax
     fill?: boolean | 'horizontal' | 'vertical'
     wrap?: WrapT
+    centered?: boolean
     className?: string
 }
 
@@ -169,6 +170,7 @@ const buildBox = () => styled('div', {
     display: flex;
     box-sizing: border-box;
     outline: none;
+    ${({ centered }) => centered && 'align-items: center; justify-content: center;'}
     ${({ align }) => align && responsiveStyle(align, 'align-items', ALIGN_MAP)}
     ${({ alignContent }) => alignContent && responsiveStyle(alignContent, 'align-content', ALIGN_CONTENT_MAP)}
     ${({ direction }) => direction && responsiveStyle(direction, '', DIRECTION_MAP)}

@@ -62,6 +62,7 @@ Their definitions can be overridden as detailed in the hacking sizes [test.ts](s
 | className    | string                                       |         |
 | pad          | px value, small, medium, large, xxlarge      | Size    |
 | margin       | px value, small, medium, large, xxlarge      | Size    |
+| centered     | true                                         | false   |
 
 align, alignContent, direction, and justify are "responsive" and can alternatively be prefixed with a size
 
