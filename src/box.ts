@@ -159,9 +159,26 @@ export interface BoxProps extends GenericProps {
 }
 
 const OWN_PROPS = [
-    'basis', 'align', 'alignContent', 'direction', 'overflowProp', 'flex', 'justify', 'as',
-    'gap', 'height', 'width', 'fill', 'wrap', 'margin', 'pad', 'padding', 'alignSelf', 'gridArea',
+    'basis', 'align', 'alignContent', 'direction', 'overflowProp', 'flex', 'justify', 'as', 'centered',
+    'gap', 'height', 'width', 'fill', 'wrap', 'margin', 'pad', 'padding', 'alignSelf', 'gridArea'
 ]
+
+const CONSUMED_PROPS = OWN_PROPS.concat([
+    'className'
+])
+
+export function extractBoxibleProps<T extends object = {}>(props: T & BoxProps) {
+    const boxProps: Partial<BoxProps> = {}
+    const rest: Partial<T> = {}
+    for (const key in props) {
+        if (CONSUMED_PROPS.includes(key)) {
+            boxProps[key] = props[key]
+        } else {
+            rest[key] = props[key]
+        }
+    }
+    return [boxProps, rest] as [Partial<BoxProps>, Partial<T>]
+}
 
 // NOTE: basis must be after flex! Otherwise, flex overrides basis
 const buildBox = () => styled('div', {

@@ -2,7 +2,7 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
 import { matchers } from '@emotion/jest'
-import { Box } from './box'
+import { Box, extractBoxibleProps } from './box'
 import { SIZES, SCREEN_SIZES } from './styles'
 
 
@@ -91,5 +91,17 @@ describe('Box Component', () => {
         expect(tree).toHaveStyleRule('align-content', 'space-between', {
             media: `@media (${SCREEN_SIZES.lg})`,
         })
+    })
+
+    it('can extract props', () => {
+        type OtherProps = { other: string }
+
+        const [boxProps, others] = extractBoxibleProps<OtherProps>({
+            other: 'a',
+            className: 'b',
+            align: 'center',
+        })
+        expect(boxProps).toEqual({ align: 'center', className: 'b' })
+        expect(others).toEqual({ other: 'a'  })
     })
 })
