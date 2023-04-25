@@ -76,6 +76,22 @@ as `label` to wrap inputs.
 </Box>
 ```
 
+#### extractBoxibleProps<T>(props)
+
+A utility function to aid in composing nested components. A small example:
+
+```tsx
+import { Box, BoxProps, extractBoxibleProps }
+import { Calc, CalcProps } from 'fake' // another component that accepts
+const Combined<CalcProps & BoxProps> = (props) => {
+  const [boxProps, calculateProps] = extractBoxibleProps<CalcProps>(props)
+  return (
+    <Box {...boxProps}><Calc {...calcProps} /></Box>
+  )
+}
+
+```
+
 #### Credits
 
 Boxible is based loosely on Grommt’s [Box component](https://v2.grommet.io/box), but re-written in Typescript
