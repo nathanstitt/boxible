@@ -8,6 +8,7 @@ exports[`Box Component allows hacking sizes 1`] = `
   display: flex;
   box-sizing: border-box;
   outline: none;
+  gap: 3px;
   margin-top: .5rem;
   padding-top: 103px;
 }
@@ -92,6 +93,18 @@ exports[`Box Component is responsive 1`] = `
   }
 }
 
+@media (min-width: 576px) {
+  .emotion-0 {
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .emotion-0 {
+    gap: 18px;
+  }
+}
+
 <div
   className="emotion-0"
 >
@@ -126,7 +139,7 @@ exports[`Box Component renders and matches snapshot 1`] = `
   -webkit-flex: 2 1 50%;
   -ms-flex: 2 1 50%;
   flex: 2 1 50%;
-  gap: .8rem;
+  gap: .5rem;
   min-height: 20%;
   max-width: 80%;
   height: 100%;

@@ -3,7 +3,7 @@ import type { Property } from 'csstype'
 
 import {
     overflowStyle, genericStyles,
-    GenericProps, Size, ScreenSizeNames,
+    GenericProps, ScreenSizeNames,
     SIZES, SCREEN_SIZES, ALIGN_MAP, ALIGN_CONTENT_MAP, BASIS, JUSTIFY_MAP, FLEX,
 } from './styles'
 
@@ -79,7 +79,7 @@ function responsiveStyle<T extends object>(
 ) {
     let styles = ''
     const toStyle = typeof cssName == 'function' ? cssName :
-        (key: Indexable) => cssName ? `${cssName}: ${map[key]};` : map[key]
+        (key: Indexable) => cssName ? `${cssName}: ${map[key] || key};` : map[key]
     if (typeof prop === 'object') {
         for (const [sz, key] of Object.entries(prop)) {
             styles += `@media(${SCREEN_SIZES[sz]}) { ${toStyle(key)}; } `
@@ -129,17 +129,10 @@ const heightStyle = (w: string | MinMax) => {
     }
 }
 
-const gapStyle = (gapProp: string | true) => {
-    let gap = gapProp
-    if (typeof gapProp === 'boolean') {
-        if (gap) {
-            gap = 'default'
-        } else {
-            return
-        }
-    }
-    const size = SIZES[gap as string] || gap
-    return { gap: size };
+const GAP_MAP = {
+    ...SIZES,
+    'true': SIZES.default,
+    'false': 0
 }
 
 export interface BoxProps extends GenericProps {
@@ -149,7 +142,7 @@ export interface BoxProps extends GenericProps {
     justify?: keyof typeof JUSTIFY_MAP | Partial<Record<ScreenSizeNames, keyof typeof JUSTIFY_MAP>>,
     flex?: FlexGrowT
     basis?: string | number | keyof typeof BASIS
-    gap?: boolean | Size
+    gap?: boolean | string | keyof typeof SIZES | Partial<Record<ScreenSizeNames, keyof typeof SIZES | string>>,
     height?: string | MinMax
     width?: string | MinMax
     fill?: boolean | 'horizontal' | 'vertical'
@@ -195,7 +188,7 @@ const buildBox = () => styled('div', {
     ${(props: any) => props.overflowProp && overflowStyle(props.overflowProp)}
     ${({ flex, basis }) => flex && flexStyle(flex, basis)}
     ${({ flex, basis }) => !flex && basis && basisStyle(basis)}
-    ${({ gap }: any) => gap && gapStyle(gap)}
+    ${({ gap }: any) => gap && responsiveStyle(gap, 'gap', GAP_MAP)}
     ${({ height }) => height && heightStyle(height)}
     ${({ width }) => width && widthStyle(width)}
     ${({ fill }) => fill && fillStyle(fill)}

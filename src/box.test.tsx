@@ -24,7 +24,7 @@ describe('Box Component', () => {
                 flex={{ grow: 2, shrink: 1 }}
                 basis="1/2"
                 justify="evenly"
-                gap="medium"
+                gap
                 height={{ min: '20%' }}
                 width={{ max: '80%' }}
                 fill="vertical"
@@ -64,9 +64,10 @@ describe('Box Component', () => {
     it('allows hacking sizes', () => {
         SIZES.large = '103px'
         SCREEN_SIZES.lg = 'min-width: 1001px'
-        const box = renderer.create(<Box margin="top" justify={{ lg: 'start' }} padding={{ top: 'large' }}>l</Box>)
+        const box = renderer.create(<Box margin="top" gap="3px" justify={{ lg: 'start' }} padding={{ top: 'large' }}>l</Box>)
         const tree = box.toJSON()
         expect(tree).toHaveStyleRule('padding-top', '103px')
+        expect(tree).toHaveStyleRule('gap', '3px')
         expect(tree).toHaveStyleRule('justify-content', 'flex-start', {
             media: `@media (min-width: 1001px)`,
         })
@@ -79,7 +80,14 @@ describe('Box Component', () => {
     })
 
     it('is responsive', () => {
-        const box = renderer.create(<Box justify={{ lg: 'evenly' }} align={{ md: 'stretch' }} alignContent={{ sm: 'end', lg: 'between' }}>btn</Box>)
+        const box = renderer.create(
+            <Box
+                align={{ md: 'stretch' }}
+                justify={{ lg: 'evenly' }}
+                gap={{ sm: 'large', lg: '18px' }}
+                alignContent={{ sm: 'end', lg: 'between' }}
+            >btn</Box>
+        )
         expect(box).toMatchSnapshot()
         const tree = box.toJSON()
         expect(tree).toHaveStyleRule('align-items', 'stretch', {
@@ -90,6 +98,12 @@ describe('Box Component', () => {
         })
         expect(tree).toHaveStyleRule('align-content', 'space-between', {
             media: `@media (${SCREEN_SIZES.lg})`,
+        })
+        expect(tree).toHaveStyleRule('gap', '18px', {
+            media: `@media (${SCREEN_SIZES.lg})`,
+        })
+        expect(tree).toHaveStyleRule('gap', '1rem', {
+            media: `@media (${SCREEN_SIZES.sm})`,
         })
     })
 

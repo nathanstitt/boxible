@@ -54,7 +54,7 @@ Their definitions can be overridden as detailed in the hacking sizes [test.ts](s
 | justify      | around, between, center, end, evenly, start  |         |
 | flex         | true, false, grow, shrink                    |         |
 | basis        | string value, auto, full, 1/2, 1/4, 1/3, 2/3 |         |
-| gap          | boolean                                      | false   |
+| gap          | px value, small, medium, large, xxlarge      | false   |
 | height       | string,( min, max )                          |         |
 | width        | string, ( min, max )                         |         |
 | fill         | boolean, 'horizontal', 'vertical'            |         |
@@ -64,7 +64,7 @@ Their definitions can be overridden as detailed in the hacking sizes [test.ts](s
 | margin       | px value, small, medium, large, xxlarge      | Size    |
 | centered     | true                                         | false   |
 
-align, alignContent, direction, and justify are "responsive" and can alternatively be prefixed with a size
+align, alignContent, direction, gap, and justify are "responsive" and can alternatively be prefixed with a size
 
 Since the Box element is a emotionjs component, you can also use the "as" prop to render elements other than div, such
 as `label` to wrap inputs.
