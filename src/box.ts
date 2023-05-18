@@ -14,8 +14,6 @@ const basisStyle = (basis: string | number | keyof typeof BASIS) => (
 type Direction = 'column' | 'row' | 'column-reverse' | 'row-reverse'
 
 const directionStyle = (direction: Direction) => `
-    min-width: 0;
-    min-height: 0;
     flex-direction: ${direction};
 `
 
@@ -180,6 +178,8 @@ const buildBox = () => styled('div', {
     display: flex;
     box-sizing: border-box;
     outline: none;
+    min-width: 0;
+    min-height: 0;
     ${({ centered }) => centered && 'align-items: center; justify-content: center;'}
     ${({ align }) => align && responsiveStyle(align, 'align-items', ALIGN_MAP)}
     ${({ alignContent }) => alignContent && responsiveStyle(alignContent, 'align-content', ALIGN_CONTENT_MAP)}
