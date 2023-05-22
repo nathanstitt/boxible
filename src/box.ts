@@ -13,7 +13,10 @@ const basisStyle = (basis: string | number | keyof typeof BASIS) => (
 
 type Direction = 'column' | 'row' | 'column-reverse' | 'row-reverse'
 
+// min-width and min-height needed because of this
+// https://stackoverflow.com/questions/36247140/why-doesnt-flex-item-shrink-past-content-size
 const directionStyle = (direction: Direction) => `
+    ${direction.startsWith('col') ? 'min-width: 0; min-height: 0;' : ''}
     flex-direction: ${direction};
 `
 
@@ -178,8 +181,6 @@ const buildBox = () => styled('div', {
     display: flex;
     box-sizing: border-box;
     outline: none;
-    min-width: 0;
-    min-height: 0;
     ${({ centered }) => centered && 'align-items: center; justify-content: center;'}
     ${({ align }) => align && responsiveStyle(align, 'align-items', ALIGN_MAP)}
     ${({ alignContent }) => alignContent && responsiveStyle(alignContent, 'align-content', ALIGN_CONTENT_MAP)}

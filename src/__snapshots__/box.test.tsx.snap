@@ -8,8 +8,6 @@ exports[`Box Component allows hacking sizes 1`] = `
   display: flex;
   box-sizing: border-box;
   outline: none;
-  min-width: 0;
-  min-height: 0;
   gap: 3px;
   margin-top: .5rem;
   padding-top: 103px;
@@ -39,8 +37,6 @@ exports[`Box Component can set shrink/grow/basis at once 1`] = `
   display: flex;
   box-sizing: border-box;
   outline: none;
-  min-width: 0;
-  min-height: 0;
   -webkit-flex: 3 0 50%;
   -ms-flex: 3 0 50%;
   flex: 3 0 50%;
@@ -61,8 +57,6 @@ exports[`Box Component is responsive 1`] = `
   display: flex;
   box-sizing: border-box;
   outline: none;
-  min-width: 0;
-  min-height: 0;
 }
 
 @media (min-width: 768px) {
@@ -126,8 +120,6 @@ exports[`Box Component renders and matches snapshot 1`] = `
   display: flex;
   box-sizing: border-box;
   outline: none;
-  min-width: 0;
-  min-height: 0;
   -webkit-align-items: stretch;
   -webkit-box-align: stretch;
   -ms-flex-align: stretch;
@@ -135,6 +127,8 @@ exports[`Box Component renders and matches snapshot 1`] = `
   -webkit-align-content: flex-end;
   -ms-flex-line-pack: flex-end;
   align-content: flex-end;
+  min-width: 0;
+  min-height: 0;
   -webkit-flex-direction: column-reverse;
   -ms-flex-direction: column-reverse;
   flex-direction: column-reverse;
