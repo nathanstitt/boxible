@@ -4,7 +4,7 @@ import type { Property } from 'csstype'
 import {
     overflowStyle, genericStyles,
     GenericProps, ScreenSizeNames,
-    SIZES, SCREEN_SIZES, ALIGN_MAP, ALIGN_CONTENT_MAP, BASIS, JUSTIFY_MAP, FLEX,
+    SIZES, SCREEN_SIZES, ALIGN_MAP, ALIGN_SELF_MAP, ALIGN_CONTENT_MAP, BASIS, JUSTIFY_MAP, FLEX,
 } from './styles'
 
 const basisStyle = (basis: string | number | keyof typeof BASIS) => (
@@ -138,9 +138,11 @@ const GAP_MAP = {
 
 export interface BoxProps extends GenericProps {
     align?: keyof typeof ALIGN_MAP | Partial<Record<ScreenSizeNames, keyof typeof ALIGN_MAP>>,
+    justify?: keyof typeof JUSTIFY_MAP | Partial<Record<ScreenSizeNames, keyof typeof JUSTIFY_MAP>>,
+    alignSelf?: keyof typeof ALIGN_SELF_MAP | Partial<Record<ScreenSizeNames, keyof typeof ALIGN_SELF_MAP>>,
+    justifySelf?: keyof typeof ALIGN_SELF_MAP | Partial<Record<ScreenSizeNames, keyof typeof ALIGN_SELF_MAP>>,
     alignContent?: keyof typeof ALIGN_CONTENT_MAP | Partial<Record<ScreenSizeNames, keyof typeof ALIGN_CONTENT_MAP>>,
     direction?: keyof typeof DIRECTION_MAP | Partial<Record<ScreenSizeNames, keyof typeof DIRECTION_MAP>>,
-    justify?: keyof typeof JUSTIFY_MAP | Partial<Record<ScreenSizeNames, keyof typeof JUSTIFY_MAP>>,
     flex?: FlexGrowT
     basis?: string | number | keyof typeof BASIS
     gap?: boolean | string | keyof typeof SIZES | Partial<Record<ScreenSizeNames, keyof typeof SIZES | string>>,
@@ -150,14 +152,15 @@ export interface BoxProps extends GenericProps {
     wrap?: WrapT
     centered?: boolean
     className?: string
+    gridArea?: string
 }
 
-const OWN_PROPS = [
+export const boxiblePropNames = [
     'basis', 'align', 'alignContent', 'direction', 'overflowProp', 'flex', 'justify', 'as', 'centered',
     'gap', 'height', 'width', 'fill', 'wrap', 'margin', 'pad', 'padding', 'alignSelf', 'gridArea'
 ]
 
-const CONSUMED_PROPS = OWN_PROPS.concat([
+const CONSUMED_PROPS = boxiblePropNames.concat([
     'className'
 ])
 
@@ -176,13 +179,15 @@ export function extractBoxibleProps<T extends object = {}>(props: T & BoxProps) 
 
 // NOTE: basis must be after flex! Otherwise, flex overrides basis
 const buildBox = () => styled('div', {
-    shouldForwardProp: (prop) => !OWN_PROPS.includes(prop as string)
+    shouldForwardProp: (prop) => !boxiblePropNames.includes(prop as string)
 }) <BoxProps>`
     display: flex;
     box-sizing: border-box;
     outline: none;
     ${({ centered }) => centered && 'align-items: center; justify-content: center;'}
     ${({ align }) => align && responsiveStyle(align, 'align-items', ALIGN_MAP)}
+    ${({ alignSelf }) => alignSelf && responsiveStyle(alignSelf, 'align-self', ALIGN_SELF_MAP)}
+    ${({ justifySelf }) => justifySelf && responsiveStyle(justifySelf, 'justify-self', ALIGN_SELF_MAP)}
     ${({ alignContent }) => alignContent && responsiveStyle(alignContent, 'align-content', ALIGN_CONTENT_MAP)}
     ${({ direction }) => direction && responsiveStyle(direction, '', DIRECTION_MAP)}
     ${({ justify }) => justify && responsiveStyle(justify, 'justify-content', JUSTIFY_MAP)}
@@ -194,6 +199,7 @@ const buildBox = () => styled('div', {
     ${({ width }) => width && widthStyle(width)}
     ${({ fill }) => fill && fillStyle(fill)}
     ${({ wrap }) => wrap && wrapStyle(wrap)}
+    ${({ gridArea }) => gridArea ? `grid-area: ${gridArea};` : ''}
     ${props => genericStyles(props)}
 `
 const box: any = buildBox()

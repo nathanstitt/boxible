@@ -80,7 +80,11 @@ export const ALIGN_SELF_MAP = {
     end: 'flex-end',
     start: 'flex-start',
     stretch: 'stretch',
+    left: 'left',
+    right: 'right',
+    baseline: 'baseline',
 }
+
 
 export const ALIGN_MAP = {
     baseline: 'baseline',
@@ -89,23 +93,16 @@ export const ALIGN_MAP = {
     start: 'flex-start',
     stretch: 'stretch',
 }
+
 export type AlignNames = keyof typeof ALIGN_MAP
 
 export interface GenericProps {
-    alignSelf?: keyof typeof ALIGN_SELF_MAP
-    gridArea?: string
     margin?: number | string | Size | Area | Side
     padding?: number | string | Size | Area | Side
 }
 
 export const genericStyles = (props: GenericProps & { theme: Theme }): CSSObject => {
     const styles: CSSObject = {}
-    if (props.alignSelf) {
-        styles['alignSelf'] = ALIGN_SELF_MAP[props.alignSelf]
-    }
-    if (props.gridArea) {
-        styles['gridArea'] = props.gridArea
-    }
     if (props.margin) {
         Object.assign(styles, edgeStyle('margin', props.margin))
     }
