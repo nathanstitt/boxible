@@ -3,7 +3,7 @@ import type { Property } from 'csstype'
 
 import {
     overflowStyle, genericStyles,
-    GenericProps, ScreenSizeNames,
+    GenericProps, ScreenSizeNames, Size,
     SIZES, SCREEN_SIZES, ALIGN_MAP, ALIGN_SELF_MAP, ALIGN_CONTENT_MAP, BASIS, JUSTIFY_MAP, FLEX,
 } from './styles'
 
@@ -14,6 +14,7 @@ const basisStyle = (basis: string | number | keyof typeof BASIS) => (
 type Direction = 'column' | 'row' | 'column-reverse' | 'row-reverse'
 
 const directionStyle = (direction: Direction) => `
+    ${direction.startsWith('col') ? 'min-width: 0; min-height: 0;' : ''}
     flex-direction: ${direction};
 `
 
@@ -77,7 +78,7 @@ function responsiveStyle<T extends object>(
 ) {
     let styles = ''
     const toStyle = typeof cssName == 'function' ? cssName :
-        (key: Indexable) => cssName ? `${cssName}: ${map[key] || key};` : map[key]
+        (key: Indexable) => cssName ? `${cssName}: ${map[key] || (typeof key == 'number' ? `${key}px` : key) };` : map[key]
     if (typeof prop === 'object') {
         for (const [sz, key] of Object.entries(prop)) {
             styles += `@media(${SCREEN_SIZES[sz]}) { ${toStyle(key)}; } `
@@ -105,7 +106,7 @@ interface MinMax {
     min?: string
 }
 
-const widthStyle = (w: string | MinMax) => {
+const widthStyle = (w: string | number | MinMax) => {
     if (typeof w === 'object') {
         const c: any = {}
         if (w.max) c.maxWidth = w.max
@@ -116,7 +117,7 @@ const widthStyle = (w: string | MinMax) => {
     }
 }
 
-const heightStyle = (w: string | MinMax) => {
+const heightStyle = (w: string | number | MinMax) => {
     if (typeof w === 'object') {
         const c: any = {}
         if (w.max) c.maxHeight = w.max
@@ -142,9 +143,9 @@ export interface BoxProps extends GenericProps {
     direction?: keyof typeof DIRECTION_MAP | Partial<Record<ScreenSizeNames, keyof typeof DIRECTION_MAP>>,
     flex?: FlexGrowT
     basis?: string | number | keyof typeof BASIS
-    gap?: boolean | string | keyof typeof SIZES | Partial<Record<ScreenSizeNames, keyof typeof SIZES | string>>,
-    height?: string | MinMax
-    width?: string | MinMax
+    gap?: boolean | number | Size | Partial<Record<ScreenSizeNames, Size | number>>,
+    height?: string | number | MinMax
+    width?: string | number | MinMax
     fill?: boolean | 'horizontal' | 'vertical'
     wrap?: WrapT
     centered?: boolean

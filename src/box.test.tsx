@@ -11,7 +11,7 @@ expect.extend(matchers)
 
 describe('Box Component', () => {
     beforeEach(() => {
-        SIZES.large = '1rem'
+        SIZES.lg = '1rem'
         SCREEN_SIZES.lg = 'min-width: 992px'
     })
 
@@ -31,8 +31,8 @@ describe('Box Component', () => {
                 wrap
                 className="a-box-for-testing"
                 id="1"
-                padding="large"
-                margin="small"
+                padding="lg"
+                margin="sm"
             >
                 A test
             </Box>
@@ -45,7 +45,7 @@ describe('Box Component', () => {
 
     it('supports numbers for sizes', () => {
         const tree = renderer.create(
-            <Box padding={10} margin={{ left: 11, right: '1rem' }} >something</Box>
+            <Box padding={10} margin={{ left: 11, right: 'lg' }} >something</Box>
         ).toJSON()
         expect(tree).toHaveStyleRule('padding', '10px')
         expect(tree).toHaveStyleRule('margin-left', '11px')
@@ -62,9 +62,9 @@ describe('Box Component', () => {
         ).toHaveStyleRule('flex', '1 1 42.2%')
     })
     it('allows hacking sizes', () => {
-        SIZES.large = '103px'
+        SIZES.lg = '103px'
         SCREEN_SIZES.lg = 'min-width: 1001px'
-        const box = renderer.create(<Box margin="top" gap="3px" justify={{ lg: 'start' }} padding={{ top: 'large' }}>l</Box>)
+        const box = renderer.create(<Box margin="top" gap={3} justify={{ lg: 'start' }} padding={{ top: 'lg' }}>l</Box>)
         const tree = box.toJSON()
         expect(tree).toHaveStyleRule('padding-top', '103px')
         expect(tree).toHaveStyleRule('gap', '3px')
@@ -84,7 +84,7 @@ describe('Box Component', () => {
             <Box
                 align={{ md: 'stretch' }}
                 justify={{ lg: 'evenly' }}
-                gap={{ sm: 'large', lg: '18px' }}
+                gap={{ sm: 'lg', lg: 18 }}
                 alignContent={{ sm: 'end', lg: 'between' }}
             >btn</Box>
         )

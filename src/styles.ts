@@ -4,12 +4,13 @@ import { capitalize } from './util'
 import type { Property } from 'csstype'
 
 export const SIZES = {
-    small: '.2rem',
+    xs: '0.1rem',
+    sm: '.2rem',
     default: '.5rem',
-    medium: '.8rem',
-    large: '1rem',
-    xlarge: '2.5rem',
-    xxlarge: '4rem',
+    md: '.8rem',
+    lg: '1rem',
+    xl: '2.5rem',
+    xxl: '4rem',
 }
 
 export type edgeKindT = "margin" | "border" | "padding"
@@ -65,12 +66,12 @@ export const FLEX = {
 }
 
 export interface Area {
-    horizontal?: Size | string | number
-    vertical?: Size | string | number
-    top?: Size | string | number
-    bottom?: Size | string | number
-    left?: Size | string | number
-    right?: Size | string | number
+    horizontal?: Size | number
+    vertical?: Size | number
+    top?: Size | number
+    bottom?: Size | number
+    left?: Size | number
+    right?: Size | number
 }
 
 export type Side = keyof Area
@@ -85,7 +86,6 @@ export const ALIGN_SELF_MAP = {
     baseline: 'baseline',
 }
 
-
 export const ALIGN_MAP = {
     baseline: 'baseline',
     center: 'center',
@@ -97,8 +97,8 @@ export const ALIGN_MAP = {
 export type AlignNames = keyof typeof ALIGN_MAP
 
 export interface GenericProps {
-    margin?: number | string | Size | Area | Side
-    padding?: number | string | Size | Area | Side
+    margin?: number | Size | Area | Side
+    padding?: number | Size | Area | Side
 }
 
 export const genericStyles = (props: GenericProps & { theme: Theme }): CSSObject => {

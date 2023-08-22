@@ -60,7 +60,7 @@ Their definitions can be overridden as detailed in the hacking sizes [test.ts](s
 | fill         | boolean, 'horizontal', 'vertical'            |         |
 | wrap         | boolean                                      | false   |
 | className    | string                                       |         |
-| pad          | px value, small, medium, large, xxlarge      | Size    |
+| padding      | px value, small, medium, large, xxlarge      | Size    |
 | margin       | px value, small, medium, large, xxlarge      | Size    |
 | centered     | true                                         | false   |
 
